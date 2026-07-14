@@ -5,8 +5,7 @@
 
 export type ClipSpec = {
   kind: "clip";
-  trimBefore: number;
-  trimAfter: number;
+  file: string;
   zoom: "in" | "out" | "none";
   grade: "warm" | "cool" | "bw" | "night" | "none";
   focalPoint?: string;
@@ -35,16 +34,16 @@ export const segments: Segment[] = [
     title: "O que importa\nnuma compra",
     accent: "#FFB020",
   },
-  { kind: "clip", durationInFrames: 43, trimBefore: 64, trimAfter: 107, zoom: "in", grade: "warm" },
-  { kind: "clip", durationInFrames: 43, trimBefore: 120, trimAfter: 163, zoom: "out", grade: "cool" },
-  { kind: "clip", durationInFrames: 16, trimBefore: 180, trimAfter: 196, zoom: "in", grade: "warm", focalPoint: "50% 40%" },
-  { kind: "clip", durationInFrames: 17, trimBefore: 210, trimAfter: 227, zoom: "out", grade: "cool" },
-  { kind: "clip", durationInFrames: 48, trimBefore: 236, trimAfter: 284, zoom: "in", grade: "warm" },
-  { kind: "clip", durationInFrames: 32, trimBefore: 300, trimAfter: 332, zoom: "in", grade: "none" },
-  { kind: "clip", durationInFrames: 43, trimBefore: 341, trimAfter: 384, zoom: "in", grade: "warm" },
-  { kind: "clip", durationInFrames: 23, trimBefore: 424, trimAfter: 447, zoom: "out", grade: "night" },
-  { kind: "clip", durationInFrames: 36, trimBefore: 469, trimAfter: 505, zoom: "in", grade: "warm" },
-  { kind: "clip", durationInFrames: 39, trimBefore: 529, trimAfter: 568, zoom: "out", grade: "cool" },
+  { kind: "clip", durationInFrames: 44, file: "clips/clip01.mp4", zoom: "in", grade: "warm" },
+  { kind: "clip", durationInFrames: 43, file: "clips/clip02.mp4", zoom: "out", grade: "cool" },
+  { kind: "clip", durationInFrames: 16, file: "clips/clip03.mp4", zoom: "in", grade: "warm", focalPoint: "50% 40%" },
+  { kind: "clip", durationInFrames: 18, file: "clips/clip04.mp4", zoom: "out", grade: "cool" },
+  { kind: "clip", durationInFrames: 48, file: "clips/clip05.mp4", zoom: "in", grade: "warm" },
+  { kind: "clip", durationInFrames: 33, file: "clips/clip06.mp4", zoom: "in", grade: "none" },
+  { kind: "clip", durationInFrames: 43, file: "clips/clip07.mp4", zoom: "in", grade: "warm" },
+  { kind: "clip", durationInFrames: 24, file: "clips/clip08.mp4", zoom: "out", grade: "night" },
+  { kind: "clip", durationInFrames: 36, file: "clips/clip09.mp4", zoom: "in", grade: "warm" },
+  { kind: "clip", durationInFrames: 39, file: "clips/clip10.mp4", zoom: "out", grade: "cool" },
   {
     kind: "card",
     durationInFrames: 45,

@@ -7,6 +7,8 @@ import { wipe } from "@remotion/transitions/wipe";
 import { clockWipe } from "@remotion/transitions/clock-wipe";
 import { GradedClip } from "./components/GradedClip";
 import { BrandCard } from "./components/BrandCard";
+import { CinemaGrade } from "./components/CinemaGrade";
+import { WatermarkMask } from "./components/WatermarkMask";
 import { segments, transitions, type TransitionKind } from "./timeline";
 
 const timing = (durationInFrames: number): TransitionTiming =>
@@ -46,43 +48,46 @@ export const EviReel: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: "black" }}>
       <Audio src={staticFile("audio/nonstop.mp3")} volume={musicVolume} />
 
-      <TransitionSeries>
-        {segments.map((segment, i) => {
-          const node =
-            segment.kind === "card" ? (
-              <BrandCard
-                eyebrow={segment.eyebrow}
-                title={segment.title}
-                subtitle={segment.subtitle}
-                accent={segment.accent}
-              />
-            ) : (
-              <GradedClip
-                trimBefore={segment.trimBefore}
-                trimAfter={segment.trimAfter}
-                zoom={segment.zoom}
-                grade={segment.grade}
-                focalPoint={segment.focalPoint}
-              />
-            );
-
-          const transition = transitions[i];
-
-          return (
-            <React.Fragment key={i}>
-              <TransitionSeries.Sequence durationInFrames={segment.durationInFrames}>
-                {node}
-              </TransitionSeries.Sequence>
-              {transition ? (
-                <TransitionSeries.Transition
-                  timing={timing(transition.durationInFrames)}
-                  presentation={presentationFor(transition.kind, width, height) as never}
+      <CinemaGrade>
+        <TransitionSeries>
+          {segments.map((segment, i) => {
+            const node =
+              segment.kind === "card" ? (
+                <BrandCard
+                  eyebrow={segment.eyebrow}
+                  title={segment.title}
+                  subtitle={segment.subtitle}
+                  accent={segment.accent}
                 />
-              ) : null}
-            </React.Fragment>
-          );
-        })}
-      </TransitionSeries>
+              ) : (
+                <GradedClip
+                  file={segment.file}
+                  zoom={segment.zoom}
+                  grade={segment.grade}
+                  focalPoint={segment.focalPoint}
+                />
+              );
+
+            const transition = transitions[i];
+
+            return (
+              <React.Fragment key={i}>
+                <TransitionSeries.Sequence durationInFrames={segment.durationInFrames}>
+                  {node}
+                </TransitionSeries.Sequence>
+                {transition ? (
+                  <TransitionSeries.Transition
+                    timing={timing(transition.durationInFrames)}
+                    presentation={presentationFor(transition.kind, width, height) as never}
+                  />
+                ) : null}
+              </React.Fragment>
+            );
+          })}
+        </TransitionSeries>
+      </CinemaGrade>
+
+      <WatermarkMask />
     </AbsoluteFill>
   );
 };

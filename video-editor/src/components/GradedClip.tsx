@@ -12,18 +12,11 @@ type Zoom = "in" | "out" | "none";
 type Grade = "warm" | "cool" | "bw" | "night" | "none";
 
 export const GradedClip: React.FC<{
-  trimBefore: number;
-  trimAfter: number;
+  file: string;
   zoom?: Zoom;
   grade?: Grade;
   focalPoint?: string;
-}> = ({
-  trimBefore,
-  trimAfter,
-  zoom = "in",
-  grade = "warm",
-  focalPoint = "50% 30%",
-}) => {
+}> = ({ file, zoom = "in", grade = "warm", focalPoint = "50% 30%" }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
 
@@ -40,15 +33,17 @@ export const GradedClip: React.FC<{
           })
         : 1.02;
 
+  // Kept deliberately subtle: the shared cinema LUT in CinemaGrade carries
+  // the overall contrast/saturation look. This is just per-shot balancing.
   const filter =
     grade === "warm"
-      ? "contrast(1.08) saturate(1.28) brightness(1.03) sepia(0.05)"
+      ? "brightness(1.02) sepia(0.04)"
       : grade === "cool"
-        ? "contrast(1.1) saturate(1.12) brightness(0.99) hue-rotate(-4deg)"
+        ? "brightness(0.99) hue-rotate(-3deg)"
         : grade === "bw"
-          ? "grayscale(1) contrast(1.18)"
+          ? "grayscale(1) contrast(1.08)"
           : grade === "night"
-            ? "contrast(1.18) saturate(1.35) brightness(1.1)"
+            ? "contrast(1.05) brightness(1.04)"
             : "none";
 
   return (
@@ -62,9 +57,7 @@ export const GradedClip: React.FC<{
       }}
     >
       <OffthreadVideo
-        src={staticFile("source.mp4")}
-        trimBefore={trimBefore}
-        trimAfter={trimAfter}
+        src={staticFile(file)}
         muted
         style={{
           width: "100%",
@@ -80,7 +73,7 @@ export const GradedClip: React.FC<{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.32) 100%)",
+            "radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.16) 100%)",
           pointerEvents: "none",
         }}
       />
