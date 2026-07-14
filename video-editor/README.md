@@ -11,6 +11,24 @@
 
 Welcome to your Remotion project!
 
+## Evi Reel edit
+
+The `EviReel` composition (`src/EviReel.tsx`) assembles a vertical (1080x1920)
+Instagram-style edit from `public/source.mp4`. The cut points, per-clip
+color grade / Ken Burns zoom, and the transition between every pair of
+clips are all defined in one place: `src/timeline.ts`.
+
+Render it with:
+
+```console
+npx remotion render src/index.ts EviReel out/evi-reel.mp4
+```
+
+**Music:** `public/audio/nonstop.mp3` is "Nonstop" by Kevin MacLeod
+(incompetech.com), licensed under Creative Commons: By Attribution 4.0
+(http://creativecommons.org/licenses/by/4.0/). Keep the attribution in the
+post/video description when publishing.
+
 ## Commands
 
 **Install Dependencies**
