@@ -8,7 +8,7 @@ import {
   useVideoConfig,
 } from "remotion";
 
-const fontFamily = "EviPoppins";
+export const fontFamily = "EviPoppins";
 
 export const brandFontFaceCss = `
 @font-face {

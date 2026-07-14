@@ -48,6 +48,36 @@ than trimming a shared one.
 (http://creativecommons.org/licenses/by/4.0/). Keep the attribution in the
 post/video description when publishing.
 
+## Botafogo Reel edit
+
+The `BotafogoReel` composition (`src/BotafogoReel.tsx`, timeline in
+`src/botafogoTimeline.ts`) is a second edit: a walk-and-talk voiceover
+(`public/botafogo-source.mp4`, cut into `public/botafogo_clips/talk1..4.mp4`)
+intercut with neighborhood photos (`public/images/`) and one reused shot from
+the `EviReel` edit (`clips/clip07.mp4`).
+
+The voiceover audio plays once, continuously, from `botafogo-source.mp4`
+(wrapped in a `<Sequence from={voiceoverStartFrame}>`); the video cuts away
+to photos/other clips on top of it without cutting the audio (standard
+B-roll/voiceover editing). `voiceoverStartFrame` and the `talk*` clip in/out
+points are pre-computed so playback stays lip-synced across every cutaway --
+see the comment above `voiceoverStartFrame` in `botafogoTimeline.ts` before
+changing any segment's `durationInFrames` or the transition durations,
+since both feed that math.
+
+Render it with:
+
+```console
+npx remotion render src/index.ts BotafogoReel out/botafogo-reel.mp4
+```
+
+**Photos:** from Wikimedia Commons.
+- `botafogo-bay.jpg` -- ["20 Botafogo & Pão de Açúcar"](https://commons.wikimedia.org/wiki/File:20_Botafogo_%26_P%C3%A3o_de_A%C3%A7%C3%BAcar_(50700568102).jpg), CC BY-SA 2.0
+- `botafogo-lifestyle.jpg` -- ["Pista de corrida e Corcovado"](https://commons.wikimedia.org/wiki/File:Pista_de_corrida_e_Corcovado_-_panoramio.jpg), CC BY-SA 3.0
+- `botafogo-night.jpg` -- ["Playa de Botafogo"](https://commons.wikimedia.org/wiki/File:Playa_de_Botafogo_(8787831198).jpg), GFDL 1.2
+
+Keep the attribution if you publish with these photos.
+
 ## Commands
 
 **Install Dependencies**
